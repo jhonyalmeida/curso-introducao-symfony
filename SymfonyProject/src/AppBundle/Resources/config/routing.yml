@@ -1,0 +1,7 @@
+questionario:
+    path: "/questionario"
+    defaults: { _controller: "AppBundle:Questionario:questionarioForm" }
+    
+confirmacao_envio:
+    path: "/confirmacao-envio"
+    defaults: { _controller: "AppBundle:Questionario:confirmacaoEnvio" }
