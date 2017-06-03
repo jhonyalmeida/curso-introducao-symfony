@@ -12,6 +12,7 @@ class QuestionarioType extends AbstractType {
     
     function buildForm(FormBuilderInterface $builder, array $options) {
         $respostas = QuestionarioService::respostas;
+        
         $builder
             ->add('notificacaoCurso', ChoiceType::class, [
                 'required' => true, 
@@ -30,6 +31,7 @@ class QuestionarioType extends AbstractType {
                 'choices' => $respostas['html']
             ])
             ->add('btnSalvar', SubmitType::class, ['label' => 'Salvar']);
+        
     }
     
 }

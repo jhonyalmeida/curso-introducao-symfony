@@ -5,3 +5,7 @@ questionario:
 confirmacao_envio:
     path: "/confirmacao-envio"
     defaults: { _controller: "AppBundle:Questionario:confirmacaoEnvio" }
+    
+resultado:
+    path: "/resultado"
+    defaults: { _controller: "AppBundle:Questionario:resultado" }
