@@ -15,8 +15,22 @@ use PokedexBundle\Form\RegiaoType;
  */
 class RegiaoController extends Controller {
     
-    function listarAction() {
-        $regioes = $this->getDoctrine()->getRepository('PokedexBundle:Regiao')->findAll();
+    function listarAction(Request $request) {
+        $qb = $this->getDoctrine()
+            ->getManager()->createQueryBuilder();
+        $qb = $qb->select('r')->from('PokedexBundle:Regiao', 'r')
+                ->where('r.id > 0');
+        if ($request->query->has('clima')) {
+            $qb->andWhere('r.clima = :clima');
+            $qb->setParameter('clima', 
+                    $request->query->get('clima'));
+        }
+        if ($request->query->has('nome')) {
+            $qb->andWhere('r.nome LIKE :nome');
+            $qb->setParameter('nome', '%' . 
+                    $request->query->get('nome') . '%');
+        }
+        $regioes = $qb->getQuery()->getResult();
         return $this->render('Regiao/regioes.html.twig', ['regioes' => $regioes]);
     }
     
