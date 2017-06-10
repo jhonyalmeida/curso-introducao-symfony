@@ -12,7 +12,7 @@ use Symfony\Bridge\Monolog\Logger;
  */
 class IndexController extends Controller {
     
-   function getIndexAction() {
+   function indexAction() {
        return $this->render('Index/index.html.twig');
    }
     
