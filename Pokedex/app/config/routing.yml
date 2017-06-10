@@ -1,0 +1,4 @@
+pokedex:
+    resource: "@PokedexBundle/Resources/config/routing.yml"
+    
+    

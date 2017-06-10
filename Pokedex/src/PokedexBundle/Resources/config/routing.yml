@@ -1,0 +1,23 @@
+index:
+    path: /
+    methods: [GET]
+    defaults: { _controller: PokedexBundle:Index:index }
+
+listarRegioes:
+    path: /regioes
+    methods: [GET]
+    defaults: { _controller: PokedexBundle:Regiao:listar }
+    
+criarRegiao:
+    path: /regioes/new
+    methods: [GET, POST]
+    defaults: { _controller: PokedexBundle:Regiao:criar }
+    
+atualizarRegiao:
+    path: /regioes/{id}/atualizar
+    methods: [GET, POST]
+    defaults: { _controller: PokedexBundle:Regiao:atualizar }
+    
+deletarRegiao:
+    path: /regioes/{id}/deletar
+    defaults: { _controller: PokedexBundle:Regiao:deletar }
