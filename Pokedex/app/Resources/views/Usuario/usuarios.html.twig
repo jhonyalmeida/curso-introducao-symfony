@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block header %}Regiões{% endblock %}
+{% block header %}Usuários{% endblock %}
 
 {% block body %}
     {% for message in app.flashes('notice') %}
@@ -16,30 +16,34 @@
             <tr>
                 <th>Id</th>
                 <th>Nome</th>
-                <th>Clima</th>
+                <th>Login</th>
+                <th>E-mail</th>
+                <th>Tipo</th>
                 <th>Ações</th>
             </tr>
         </thead>
         <tbody>
-            {% for r in regioes %}
+            {% for u in usuarios %}
                 <tr>
-                    <td>{{r.id}}</td>
-                    <td>{{r.nome}}</td>
-                    <td>{{r.clima}}</td>
+                    <td>{{u.id}}</td>
+                    <td>{{u.nome}}</td>
+                    <td>{{u.username}}</td>
+                    <td>{{u.email}}</td>
+                    <td>{{u.role}}</td>
                     <td>
-                        <a href="{{path('atualizarRegiao', {'id': r.id})}}">Alterar</a>
-                        | <a href="{{path('deletarRegiao', {'id': r.id})}}">Excluir</a>
+                        <a href="{{path('atualizarUsuario', {'id': u.id})}}">Alterar</a>
+                        | <a href="{{path('deletarUsuario', {'id': u.id})}}">Excluir</a>
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="4">Nenhuma região cadastrada.</td>
+                    <td colspan="6">Nenhum usuário cadastrado.</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
     <div>
-        <a class="btn btn-primary" href="{{path('criarRegiao')}}">Novo</a>
+        <a class="btn btn-primary" href="{{path('criarUsuario')}}">Novo</a>
     </div>
 {% endblock %}
 

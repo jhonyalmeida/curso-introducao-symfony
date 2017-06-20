@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Título da Página{% endblock %}</title>
+        <title>{% block title %}Pokedex{% endblock %}</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
               integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
@@ -13,14 +13,34 @@
     <body>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="#">Agenda</a></li>
-                        <li><a href="#">Pokémons</a></li>
-                        <li><a href="#">Tipos</a></li>
-                        <li><a href="{{path('listarRegioes')}}">Regiões</a></li>
-                        <li><a href="#">Usuários</a></li>
-                    </ul>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    {% if app.user %}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    {{app.user.username}} <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Agenda</a></li>
+                                    <li><a href="{{path('listarPokemons')}}">Pokémons</a></li>
+                                    <li><a href="{{path('listarTipos')}}">Tipos</a></li>
+                                    <li><a href="{{path('listarRegioes')}}">Regiões</a></li>
+                                    <li><a href="{{path('listarUsuarios')}}">Usuários</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{{path('logout')}}"><span class="glyphicon glyphicon-log-out"></span></a></li>
+                        </ul>
+                    {% else %}
+                        <form action="{{path('login')}}" method="post" class="navbar-form navbar-right">
+                            <div class="form-group {{error ? 'has-error' : ''}}">
+                                <input type="text" name="_username" value="{{last_username}}" class="form-control" placeholder="Usuário">
+                            </div>
+                            <div class="form-group {{error ? 'has-error' : ''}}">
+                                <input type="password" name="_password" class="form-control" placeholder="Senha">
+                            </div>
+                            <button type="submit" name="login" class="btn btn-primary">Logar</button>
+                        </form>
+                    {% endif %}
                 </div>
             </div>
         </nav>

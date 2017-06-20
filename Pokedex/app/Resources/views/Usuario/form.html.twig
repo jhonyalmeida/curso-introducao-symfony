@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block header %}
-    {% if regiao is defined %} Região {{regiao.nome}} {% else %} Nova Região {% endif %}
+    {% if usuario is defined %} Usuário {{usuario.nome}} {% else %} Novo Usuário {% endif %}
 {% endblock %}
 
 {% block body %}
@@ -23,8 +23,26 @@
         </div>
         <div class="row">
             <div class="form-group col-lg-6">
-                {{form_label(form.clima)}}
-                {{form_widget(form.clima, {'attr': {'class': 'form-control'} })}}
+                {{form_label(form.username)}}
+                {{form_widget(form.username, {'attr': {'class': 'form-control'} })}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-6">
+                {{form_label(form.password)}}
+                {{form_widget(form.password, {'attr': {'class': 'form-control'} })}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-6">
+                {{form_label(form.email)}}
+                {{form_widget(form.email, {'attr': {'class': 'form-control'} })}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-6">
+                {{form_label(form.role)}}
+                {{form_widget(form.role, {'attr': {'class': 'form-control'} })}}
             </div>
         </div>
         <div class="form-group">
@@ -33,6 +51,6 @@
     {{form_end(form)}}
     <br/>
     <div>
-        <a href="{{path('listarRegioes')}}">Voltar</a>
+        <a href="{{path('listarUsuarios')}}">Voltar</a>
     </div>
 {% endblock %}

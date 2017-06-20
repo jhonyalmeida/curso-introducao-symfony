@@ -3,7 +3,6 @@
 namespace PokedexBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Bridge\Monolog\Logger;
 
 /**
  * Description of IndexController
@@ -13,7 +12,13 @@ use Symfony\Bridge\Monolog\Logger;
 class IndexController extends Controller {
     
    function indexAction() {
-       return $this->render('Index/index.html.twig');
+        $authenticationUtils = $this->get('security.authentication_utils');
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
+        return $this->render('Index/index.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error
+        ]);
    }
     
 }

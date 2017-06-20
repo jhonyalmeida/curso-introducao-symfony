@@ -18,7 +18,7 @@ class RegiaoController extends Controller {
     function listarAction(Request $request) {
         $qb = $this->getDoctrine()
             ->getManager()->createQueryBuilder();
-        $qb = $qb->select('r')->from('PokedexBundle:Regiao', 'r')
+        $qb->select('r')->from('PokedexBundle:Regiao', 'r')
                 ->where('r.id > 0');
         if ($request->query->has('clima')) {
             $qb->andWhere('r.clima = :clima');

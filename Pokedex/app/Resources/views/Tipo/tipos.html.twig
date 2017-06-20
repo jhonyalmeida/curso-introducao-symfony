@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block header %}Regiões{% endblock %}
+{% block header %}Tipos de Pokémon{% endblock %}
 
 {% block body %}
     {% for message in app.flashes('notice') %}
@@ -16,30 +16,32 @@
             <tr>
                 <th>Id</th>
                 <th>Nome</th>
-                <th>Clima</th>
+                <th>Descrição</th>
+                <th>Fraqueza</th>
                 <th>Ações</th>
             </tr>
         </thead>
         <tbody>
-            {% for r in regioes %}
+            {% for t in tipos %}
                 <tr>
-                    <td>{{r.id}}</td>
-                    <td>{{r.nome}}</td>
-                    <td>{{r.clima}}</td>
+                    <td>{{t.id}}</td>
+                    <td>{{t.nome}}</td>
+                    <td>{{t.descricao}}</td>
+                    <td>{{t.fraqueza ? t.fraqueza.nome : 'Não possui'}}</td>
                     <td>
-                        <a href="{{path('atualizarRegiao', {'id': r.id})}}">Alterar</a>
-                        | <a href="{{path('deletarRegiao', {'id': r.id})}}">Excluir</a>
+                        <a href="{{path('atualizarTipo', {'id': t.id})}}">Alterar</a>
+                        | <a href="#">Excluir</a>
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="4">Nenhuma região cadastrada.</td>
+                    <td colspan="5">Nenhuma tipo cadastrado.</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
     <div>
-        <a class="btn btn-primary" href="{{path('criarRegiao')}}">Novo</a>
+        <a class="btn btn-primary" href="{{path('criarTipo')}}">Novo</a>
     </div>
 {% endblock %}
 
