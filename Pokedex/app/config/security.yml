@@ -38,6 +38,6 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/regioes, role: ROLE_ADMIN }
         - { path: ^/tipos, role: ROLE_ADMIN }
-        - { path: ^/pokemons, role: ROLE_ADMIN }
+        - { path: ^/pokemons, role: ROLE_USER }
         - { path: ^/usuarios, role: ROLE_ADMIN }
         - { path: ^/agenda, role: ROLE_USER }

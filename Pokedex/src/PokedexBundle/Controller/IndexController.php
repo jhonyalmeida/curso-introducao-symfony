@@ -20,5 +20,9 @@ class IndexController extends Controller {
             'error' => $error
         ]);
    }
+   
+   function agendaAction() {
+        return $this->render('Agenda/index.html.twig');
+   }
     
 }

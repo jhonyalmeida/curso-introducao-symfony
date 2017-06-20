@@ -3,6 +3,11 @@ index:
     methods: [GET]
     defaults: { _controller: PokedexBundle:Index:index }
 
+agenda:
+    path: /agenda
+    methods: [GET]
+    defaults: { _controller: PokedexBundle:Index:agenda }
+
 listarPokemons:
     path: /pokemons
     methods: [GET]
