@@ -38,6 +38,10 @@ class PokemonManager {
         return $pokemon;
     }
     
+    function buscarUm(array $params) {
+        return $this->createQuery($params)->setMaxResults(1)->getOneOrNullResult();
+    }
+    
     function listar(array $params) {
         return $this->createQuery($params)->getResult();
     }
@@ -47,7 +51,7 @@ class PokemonManager {
         $qb->select('p')->from('PokedexBundle:Pokemon', 'p')->where('p.id > 0');
         $paramMap = $this->paramMap();
         foreach ($params as $name => $value) {
-            if (key_exists($paramMap, $name)) {
+            if (key_exists($name, $paramMap) && !is_null($value)) {
                 $paramMap[$name]($qb, $value);
             }
         }

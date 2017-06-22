@@ -3,6 +3,9 @@
 namespace PokedexBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use PokedexBundle\Form\PokedexType;
+use PokedexBundle\Service\PokemonManager;
 
 /**
  * Description of IndexController
@@ -10,6 +13,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  * @author Jhony
  */
 class IndexController extends Controller {
+    
+    private $pokemonManager;
+    
+    function __construct(PokemonManager $pokemonManager) {
+        $this->pokemonManager = $pokemonManager;
+    }
     
    function indexAction() {
         $authenticationUtils = $this->get('security.authentication_utils');
@@ -21,8 +30,19 @@ class IndexController extends Controller {
         ]);
    }
    
-   function agendaAction() {
-        return $this->render('Agenda/index.html.twig');
-   }
+    function agendaAction(Request $request) {
+        $form = $this->createForm(PokedexType::class);
+        $form->handleRequest($request);
+        $pokemon = null;
+        if ($form->isSubmitted()) {
+            $dados = $form->getData();
+            $pokemon = $this->pokemonManager->buscarUm([
+                'nome' => $dados['nome'], 'numero' => $dados['numero']
+            ]);
+        }
+        return $this->render('Agenda/index.html.twig', [
+            'form' => $form->createView(), 'pokemon' => $pokemon
+        ]);
+    }
     
 }

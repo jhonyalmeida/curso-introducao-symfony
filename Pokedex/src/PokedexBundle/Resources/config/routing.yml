@@ -5,7 +5,6 @@ index:
 
 agenda:
     path: /agenda
-    methods: [GET]
     defaults: { _controller: PokedexBundle:Index:agenda }
 
 listarPokemons:
