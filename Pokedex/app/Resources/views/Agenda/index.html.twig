@@ -11,7 +11,7 @@
             <img style="margin-left: 35px; margin-top: 160px; height: 320px; width: 320px;" 
                  src="{{asset('bundles/PokedexBundle/placeholder.png')}}" />
         {% endif %}
-        <div style="width: 500px; position: absolute; left: 650px; top: 260px;">
+        <div style="width: 250px; position: relative; left: 490px; top: -300px;">
             {{form_start(form, {'attr': {'id': 'formAgenda'} })}}
                 <div class="row">
                     <div class="form-group col-lg-6">
@@ -39,6 +39,8 @@
                 <p>
                     <strong>Região: </strong>{{pokemon.regiao.nome}}
                 </p>
+            {% else %}
+                <p>Nenhum pokémon encontrado</p>
             {% endif %}
         </div>
     </div>
