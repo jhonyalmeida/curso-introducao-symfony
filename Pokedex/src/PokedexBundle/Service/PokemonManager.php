@@ -3,18 +3,23 @@
 namespace PokedexBundle\Service;
 
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use PokedexBundle\Entity\Pokemon;
+use PokedexBundle\Event\PokemonEvent;
 
 class PokemonManager {
     
     private $entityManager;
     private $uploadPath;
+    private $eventDispatcher;
     
-    function __construct(EntityManagerInterface $em, $uploadPath = '../web/uploads') {
+    function __construct(EntityManagerInterface $em, EventDispatcherInterface $eventDispatcher, 
+            $uploadPath = '../web/uploads') {
         $this->entityManager = $em;
         $this->uploadPath = $uploadPath;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     function paramMap() {
@@ -63,6 +68,7 @@ class PokemonManager {
         $pokemon->setImagem($fileName);
         $this->entityManager->persist($pokemon);
         $this->entityManager->flush();
+        $this->eventDispatcher->dispatch('events.pokemon_criado', new PokemonEvent($pokemon));
         $pokemon->getArquivoImagem()->move($this->uploadPath, $fileName);
     }
     

@@ -24,6 +24,11 @@ class Pokemon {
     private $nome;
     
     /**
+    * @ORM\Column(type = "string", length = 255)
+    */
+    private $descricao;
+    
+    /**
      * @ORM\Column(type = "integer", unique = true)
      */
     private $numero;
@@ -81,7 +86,15 @@ class Pokemon {
     function getImagem() {
         return $this->imagem;
     }
+    
+    function getDescricao() {
+        return $this->descricao;
+    }
 
+    function setDescricao($descricao) {
+        $this->descricao = $descricao;
+    }
+    
     function setNome($nome) {
         $this->nome = $nome;
     }

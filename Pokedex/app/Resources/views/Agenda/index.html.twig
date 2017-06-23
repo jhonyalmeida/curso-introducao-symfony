@@ -39,6 +39,9 @@
                 <p>
                     <strong>Região: </strong>{{pokemon.regiao.nome}}
                 </p>
+                <p>
+                    <strong>Descrição: </strong>{{pokemon.descricao}}
+                </p>
             {% else %}
                 <p>Nenhum pokémon encontrado</p>
             {% endif %}
@@ -51,6 +54,15 @@
         $('.form-control').keypress(function (e) {
             if (e.which === 13) {
                 $('#formAgenda').submit();
+            }
+        });
+        
+        $(function() {
+            if ('speechSynthesis' in window) {
+                var text = "{{pokemon ? "#{pokemon.nome}, #{pokemon.descricao}" : ''}}";
+                var msg = new SpeechSynthesisUtterance();          
+                msg.text = text;
+                speechSynthesis.speak(msg);
             }
         });
     </script>

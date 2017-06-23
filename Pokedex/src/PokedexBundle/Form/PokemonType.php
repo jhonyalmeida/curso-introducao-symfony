@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -18,6 +19,7 @@ class PokemonType extends AbstractType {
     
     function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('nome')
+                ->add('descricao', TextareaType::class)
                 ->add('numero', NumberType::class)
                 ->add('tipo', EntityType::class, [
                     'class' => 'PokedexBundle:Tipo',

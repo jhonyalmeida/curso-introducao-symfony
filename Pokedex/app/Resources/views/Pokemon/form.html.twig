@@ -28,6 +28,12 @@
         </div>
         <div class="row">
             <div class="form-group col-lg-6">
+                {{form_label(form.descricao)}}
+                {{form_widget(form.descricao, {'attr': {'class': 'form-control'} })}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-lg-6">
                 {{form_label(form.tipo)}}
                 {{form_widget(form.tipo, {'attr': {'class': 'form-control'} })}}
             </div>
