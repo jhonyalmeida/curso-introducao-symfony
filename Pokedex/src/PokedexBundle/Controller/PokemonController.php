@@ -27,8 +27,9 @@ class PokemonController extends Controller {
     }
     
     function listarAction(Request $request) {
-        $pokemons = $this->pokemonManager->listar($request->query->all());
-        return $this->render('Pokemon/pokemons.html.twig', ['pokemons' => $pokemons]);
+        return $this->render('Pokemon/pokemons.html.twig', [
+            'pokemons' => $this->pokemonManager->listar($request->query->all())
+        ]);
     }
     
     function getImagemAction(Request $request, $id) {

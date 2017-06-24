@@ -52,7 +52,7 @@ class PokemonManager {
     
     private function createQuery(array $params) {
         $qb = $this->entityManager->createQueryBuilder();
-        $qb->select('p')->from('PokedexBundle:Pokemon', 'p')->where('p.id > 0');
+        $qb->select('p')->from('PokedexBundle:Pokemon', 'p');     
         $paramMap = $this->paramMap();
         foreach ($params as $name => $value) {
             if (key_exists($name, $paramMap) && !is_null($value)) {

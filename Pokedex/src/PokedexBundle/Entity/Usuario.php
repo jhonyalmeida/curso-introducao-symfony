@@ -101,7 +101,8 @@ class Usuario implements UserInterface, \Serializable {
         return serialize([
             $this->id,
             $this->username,
-            $this->password
+            $this->password,
+            $this->email
         ]);
     }
 
@@ -109,7 +110,8 @@ class Usuario implements UserInterface, \Serializable {
         list (
             $this->id,
             $this->username,
-            $this->password
+            $this->password,
+            $this->email
         ) = unserialize($serialized);
     }
 
