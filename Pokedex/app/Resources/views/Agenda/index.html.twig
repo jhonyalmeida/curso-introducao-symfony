@@ -11,15 +11,13 @@
             <img style="margin-left: 35px; margin-top: 160px; height: 320px; width: 320px;" 
                  src="{{asset('bundles/PokedexBundle/placeholder.png')}}" />
         {% endif %}
-        <div style="width: 250px; position: relative; left: 490px; top: -300px;">
+        <div style="width: 250px; height: 340px; overflow: scroll; position: relative; left: 490px; top: -300px;">
             {{form_start(form, {'attr': {'id': 'formAgenda'} })}}
                 <div class="row">
                     <div class="form-group col-lg-6">
                         {{form_label(form.nome)}}
                         {{form_widget(form.nome, {'attr': {'class': 'form-control'} })}}
                     </div>
-                </div>
-                <div class="row">
                     <div class="form-group col-lg-6">
                         {{form_label(form.numero)}}
                         {{form_widget(form.numero, {'attr': {'class': 'form-control'} })}}
@@ -28,10 +26,7 @@
             {{form_end(form)}}
             {% if pokemon %}
                 <p style="margin-top: 5px;">
-                    <strong>Nome: </strong>{{pokemon.nome}}
-                </p>
-                <p>
-                    <strong>Número: </strong>#{{pokemon.numero}}
+                    <strong>#{{pokemon.numero}} {{pokemon.nome}}</strong>
                 </p>
                 <p>
                     <strong>Tipo: </strong>{{pokemon.tipo.nome}}
@@ -40,7 +35,7 @@
                     <strong>Região: </strong>{{pokemon.regiao.nome}}
                 </p>
                 <p>
-                    <strong>Descrição: </strong>{{pokemon.descricao}}
+                    {{pokemon.descricao}}
                 </p>
             {% else %}
                 <p>Nenhum pokémon encontrado</p>
@@ -60,8 +55,7 @@
         $(function() {
             if ('speechSynthesis' in window) {
                 var text = "{{pokemon ? "#{pokemon.nome}, #{pokemon.descricao}" : ''}}";
-                var msg = new SpeechSynthesisUtterance();          
-                msg.text = text;
+                var msg = new SpeechSynthesisUtterance(text);
                 speechSynthesis.speak(msg);
             }
         });
