@@ -15,8 +15,7 @@ class PokemonManager {
     private $uploadPath;
     private $eventDispatcher;
     
-    function __construct(EntityManagerInterface $em, EventDispatcherInterface $eventDispatcher, 
-            $uploadPath = '../web/uploads') {
+    function __construct(EntityManagerInterface $em, EventDispatcherInterface $eventDispatcher, $uploadPath) {
         $this->entityManager = $em;
         $this->uploadPath = $uploadPath;
         $this->eventDispatcher = $eventDispatcher;

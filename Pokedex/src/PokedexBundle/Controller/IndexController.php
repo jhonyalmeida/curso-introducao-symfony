@@ -4,6 +4,7 @@ namespace PokedexBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use PokedexBundle\Form\PokedexType;
 use PokedexBundle\Service\PokemonManager;
 
@@ -20,16 +21,15 @@ class IndexController extends Controller {
         $this->pokemonManager = $pokemonManager;
     }
     
-   function indexAction() {
-        $authenticationUtils = $this->get('security.authentication_utils');
+    function indexAction(AuthenticationUtils $authenticationUtils) {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
         return $this->render('Index/index.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error
         ]);
-   }
-   
+    }
+    
     function agendaAction(Request $request) {
         $form = $this->createForm(PokedexType::class);
         $form->handleRequest($request);
@@ -37,7 +37,8 @@ class IndexController extends Controller {
         if ($form->isSubmitted()) {
             $dados = $form->getData();
             $pokemon = $this->pokemonManager->buscarUm([
-                'nome' => $dados['nome'], 'numero' => $dados['numero']
+                'nome' => $dados['nome'], 
+                'numero' => $dados['numero']
             ]);
         }
         return $this->render('Agenda/index.html.twig', [

@@ -3,8 +3,8 @@
 namespace PokedexBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bridge\Monolog\Logger;
 use PokedexBundle\Entity\Usuario;
 use PokedexBundle\Form\UsuarioType;
 
@@ -20,6 +20,9 @@ class UsuarioController extends Controller {
         return $this->render('Usuario/usuarios.html.twig', ['usuarios' => $usuarios]);
     }
     
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     function criarAction(Request $request) {
         $usuario = new Usuario();
         $form = $this->createForm(UsuarioType::class, $usuario);
