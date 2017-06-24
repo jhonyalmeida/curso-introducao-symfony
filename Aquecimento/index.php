@@ -19,7 +19,7 @@
     $filtro = $_GET['filtro'];
     
     $teste = function($nome) { 
-        echo "<marquee>$nome</marquee>";
+        echo "<h1>$nome</h1>";
     };
     $message = $teste('Jhony');
     
