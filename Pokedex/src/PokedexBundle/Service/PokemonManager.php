@@ -67,8 +67,9 @@ class PokemonManager {
         $pokemon->setImagem($fileName);
         $this->entityManager->persist($pokemon);
         $this->entityManager->flush();
-        $this->eventDispatcher->dispatch('events.pokemon_criado', new PokemonEvent($pokemon));
+        //$this->eventDispatcher->dispatch('events.pokemon_criado', new PokemonEvent($pokemon));
         $pokemon->getArquivoImagem()->move($this->uploadPath, $fileName);
+        return $pokemon;
     }
     
     function atualizar(Pokemon $pokemon) {

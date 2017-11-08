@@ -1,6 +1,11 @@
 pokedex:
     resource: "@PokedexBundle/Resources/config/routing.yml"
     
+pokedex_api:
+    resource: "@PokedexApiBundle/Controller/"
+    type: annotation
+    prefix: /api
+    
 login:
     path: /login
     

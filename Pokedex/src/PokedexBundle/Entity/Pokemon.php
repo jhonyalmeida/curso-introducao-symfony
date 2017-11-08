@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table("pokemons")
  */
-class Pokemon {
+class Pokemon implements \JsonSerializable {
     
     /**
      * @ORM\Id
@@ -53,9 +53,15 @@ class Pokemon {
      */
     private $imagem;
     
+    private $linkImagem;
+    
     private $arquivoImagem;
     
-    function __construct() {
+    function __construct($nome, $descricao, $numero, $tipo) {
+        $this->nome = $nome;
+        $this->descricao = $descricao;
+        $this->numero = $numero;
+        $this->tipo = $tipo;
         $this->dataCadastro = new \DateTime('now');
     }
     
@@ -123,4 +129,27 @@ class Pokemon {
         $this->arquivoImagem = $arquivoImagem;
     }
     
+    function getLinkImagem() {
+        return $this->linkImagem;
+    }
+
+    function setLinkImagem($linkImagem) {
+        $this->linkImagem = $linkImagem;
+    }
+
+    function jsonSerialize() {
+        return [
+                'id' => $this->id,
+                'nome' => $this->nome,
+                'descricao' => $this->descricao,
+                'numero' => $this->numero,
+                'linkImagem' => $this->linkImagem,
+                'tipo' => [
+                    'id' => $this->tipo->getId(),
+                    'nome' => $this->tipo->getNome()
+                ],
+                'dataCadastro' => $this->dataCadastro->format('Y-m-d H:i:s')
+            ];
+    }
+
 }

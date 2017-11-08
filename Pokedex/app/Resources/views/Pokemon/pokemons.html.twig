@@ -29,7 +29,7 @@
                     <td>{{p.numero}}</td>
                     <td>{{p.nome}}</td>
                     <td>{{p.tipo.nome}}</td>
-                    <td>{{p.regiao.nome}}</td>
+                    <td>{{p.regiao ? p.regiao.nome : 'Desconhecido'}}</td>
                     <td>{{p.dataCadastro|date('d/m/Y H:i')}}</td>
                     <td>
                         <img style="height: 64px; width: 64px;" 

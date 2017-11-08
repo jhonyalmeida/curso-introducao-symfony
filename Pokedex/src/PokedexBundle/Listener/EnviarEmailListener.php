@@ -26,11 +26,13 @@ class EnviarEmailListener implements EventSubscriberInterface {
     }
 
     function enviarEmail(PokemonEvent $event) {
-        $message = (new \Swift_Message('Notificação Pokédex'))
-            ->setFrom('naoresponda@pokedex.com')
-            ->setTo($this->user->getEmail())
-            ->setBody("Novo pokémon encontrado: {$event->getPokemon()->getNome()}");
-        $this->mailer->send($message);
+        if ($this->user) {
+            $message = (new \Swift_Message('Notificação Pokédex'))
+                ->setFrom('naoresponda@pokedex.com')
+                ->setTo($this->user->getEmail())
+                ->setBody("Novo pokémon encontrado: {$event->getPokemon()->getNome()}");
+            $this->mailer->send($message);
+        }
     }
     
 }
